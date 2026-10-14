@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Ghép ảnh 2 mặt CCCD</title>
-    <!-- Cropper.js thư viện xử lý xoay và cắt ảnh -->
+    <!-- Cropper.js thư viện cắt và xoay ảnh -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
     
@@ -31,7 +31,7 @@
             border-radius: 12px; 
             box-shadow: 0 4px 16px rgba(0,0,0,0.08); 
             width: 100%; 
-            max-width: 600px; 
+            max-width: 650px; 
             text-align: center; 
         }
         h2 { 
@@ -70,6 +70,26 @@
             border-radius: 10px; 
             padding: 12px; 
             margin-bottom: 15px; 
+            text-align: left;
+        }
+        .section-header {
+            margin-bottom: 8px;
+        }
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1a73e8;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .crop-guide {
+            font-size: 13px;
+            color: #555;
+            background: #eef7ff;
+            padding: 6px 10px;
+            border-radius: 6px;
+            border-left: 3px solid var(--primary);
+            margin-bottom: 8px;
         }
         .toolbar { 
             display: flex; 
@@ -102,6 +122,7 @@
             align-items: center; 
             justify-content: center; 
             outline: none; 
+            text-align: center;
         }
         .paste-area:focus-within { 
             border-color: var(--primary); 
@@ -116,11 +137,11 @@
         }
         .cropper-wrapper { 
             width: 100%; 
-            max-height: 320px; 
+            max-height: 340px; 
             display: none; 
             justify-content: center; 
             overflow: hidden; 
-            background: #24292e; 
+            background: #111; 
             border-radius: 6px; 
         }
         .cropper-wrapper img { max-width: 100%; display: block; }
@@ -141,7 +162,7 @@
             font-weight: bold; 
         }
         .btn-top { background: var(--primary); margin-bottom: 20px; }
-        .status { margin-top: 10px; color: #d73a49; font-weight: 600; min-height: 22px; font-size: 14px; }
+        .status { margin-top: 10px; color: #d73a49; font-weight: 600; min-height: 22px; font-size: 14px; text-align: center; }
         input[type="file"] { display: none; }
     </style>
 </head>
@@ -159,8 +180,11 @@
 
     <!-- MẶT TRƯỚC -->
     <div class="image-section">
+        <div class="section-header">
+            <span class="section-title">Mặt trước CCCD</span>
+            <div class="crop-guide">📌 <strong>Mặt trước CCCD</strong> - Hãy kéo thả trực tiếp trên ảnh để cắt đúng khu vực CCCD, loại bỏ phần thừa.</div>
+        </div>
         <div class="toolbar">
-            <strong style="margin-right: auto; color: #24292e; font-size: 14px;">Mặt trước CCCD</strong>
             <input type="file" id="file1" accept="image/*" onchange="handleFileSelect(event, 'box1')">
             <button class="btn-tool btn-upload" onclick="document.getElementById('file1').click()">📁 Chọn ảnh</button>
             <button class="btn-tool" onclick="rotateImage('box1', -90)" id="btnRotL1" disabled>↺ Trái</button>
@@ -168,7 +192,7 @@
         </div>
         <div id="box1" class="paste-area" tabindex="0">
             <div class="placeholder-text" onclick="document.getElementById('file1').click()">
-                Chạm để chọn ảnh mặt trước<br><small>(hoặc Ctrl + V)</small>
+                Chạm để chọn ảnh mặt trước CCCD<br><small>(hoặc bấm Ctrl + V)</small>
             </div>
             <div class="cropper-wrapper" id="wrap1">
                 <img id="img1">
@@ -178,8 +202,11 @@
 
     <!-- MẶT SAU -->
     <div class="image-section">
+        <div class="section-header">
+            <span class="section-title">Mặt sau CCCD</span>
+            <div class="crop-guide">📌 <strong>Mặt sau CCCD</strong> - Hãy kéo thả trực tiếp trên ảnh để cắt đúng khu vực CCCD, loại bỏ phần thừa.</div>
+        </div>
         <div class="toolbar">
-            <strong style="margin-right: auto; color: #24292e; font-size: 14px;">Mặt sau CCCD</strong>
             <input type="file" id="file2" accept="image/*" onchange="handleFileSelect(event, 'box2')">
             <button class="btn-tool btn-upload" onclick="document.getElementById('file2').click()">📁 Chọn ảnh</button>
             <button class="btn-tool" onclick="rotateImage('box2', -90)" id="btnRotL2" disabled>↺ Trái</button>
@@ -187,7 +214,7 @@
         </div>
         <div id="box2" class="paste-area" tabindex="0">
             <div class="placeholder-text" onclick="document.getElementById('file2').click()">
-                Chạm để chọn ảnh mặt sau<br><small>(hoặc Ctrl + V)</small>
+                Chạm để chọn ảnh mặt sau CCCD<br><small>(hoặc bấm Ctrl + V)</small>
             </div>
             <div class="cropper-wrapper" id="wrap2">
                 <img id="img2">
@@ -223,7 +250,7 @@
 
         state.cropper = new Cropper(img, {
             viewMode: 1,
-            autoCropArea: 0.95,
+            autoCropArea: 0.9,
             responsive: true,
             restore: false
         });
